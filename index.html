@@ -160,32 +160,51 @@
         font-size: 1.1rem;
     }
 
-    /* Copy Button */
-    .copy-btn {
-        width: 100%;
-        padding: 25px;
-        background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    /* Action Buttons Row */
+    .action-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .action-btn {
+        padding: 20px;
         border: none;
         border-radius: 20px;
-        color: white;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 15px;
+        gap: 12px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
 
-    .copy-btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        background: linear-gradient(135deg, #AB47BC 0%, #8E24AA 100%);
+    .copy-btn {
+        background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+        color: white;
     }
 
-    .copy-btn:active {
+    .save-btn {
+        background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+        color: white;
+    }
+
+    .favorites-btn {
+        background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        color: white;
+        grid-column: span 2;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    .action-btn:active {
         transform: translateY(-2px);
     }
 
@@ -216,24 +235,127 @@
         transform: translateX(-50%) translateY(0);
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    /* Favorites Modal */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        padding: 20px;
     }
 
-    .fade-in {
-        animation: fadeIn 0.5s ease forwards;
+    .modal-overlay.show {
+        display: flex;
     }
 
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
+    .modal-content {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(30px);
+        border-radius: 25px;
+        padding: 30px;
+        max-width: 500px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
 
-    .pulse {
-        animation: pulse 0.3s ease;
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-title {
+        font-family: 'Pacifico', cursive;
+        font-size: 2rem;
+        color: white;
+    }
+
+    .close-modal {
+        background: rgba(255, 0, 0, 0.3);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .close-modal:hover {
+        background: rgba(255, 0, 0, 0.5);
+        transform: rotate(90deg);
+    }
+
+    .favorites-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .favorite-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .favorite-text {
+        flex: 1;
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+
+    .favorite-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .favorite-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .favorite-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .empty-favorites {
+        text-align: center;
+        padding: 40px;
+        font-size: 1.2rem;
+        opacity: 0.7;
     }
 
     /* Loading */
@@ -279,12 +401,12 @@
             font-size: 2rem;
         }
         
-        .copy-btn {
-            padding: 20px;
-            font-size: 1.1rem;
+        .action-btn {
+            padding: 18px 15px;
+            font-size: 1rem;
         }
         
-        .buttons {
+        .buttons, .action-buttons {
             gap: 15px;
         }
     }
@@ -293,6 +415,14 @@
         .buttons {
             grid-template-columns: 1fr;
         }
+        
+        .action-buttons {
+            grid-template-columns: 1fr;
+        }
+        
+        .favorites-btn {
+            grid-column: span 1;
+        }
     }
 </style>
 </head>
@@ -300,7 +430,7 @@
 <body>
 <div class="container">
     <!-- Profile Section -->
-    <div class="profile-card fade-in">
+    <div class="profile-card">
         <img src="https://pics.auntmia.com/thumbs/sexart/28566/f4e_062.jpg" alt="Hotty Mom" class="profile-pic">
         <h1 class="title">Hotty Mom 🔥</h1>
         <p class="subtitle">Spicy Truth or Dare</p>
@@ -308,15 +438,15 @@
     </div>
 
     <!-- Message Card -->
-    <div class="message-card fade-in" style="animation-delay: 0.1s">
+    <div class="message-card">
         <div class="message" id="message">
             Tap a button below to get started! 💋
         </div>
         <div class="loading" id="loading">Getting your challenge... 🔥</div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="buttons fade-in" style="animation-delay: 0.2s">
+    <!-- Game Buttons -->
+    <div class="buttons">
         <button class="btn truth-btn" onclick="getTruth()">
             <span class="btn-icon">💭</span>
             <span class="btn-text">Spicy Truth</span>
@@ -327,11 +457,34 @@
         </button>
     </div>
 
-    <!-- Copy Button -->
-    <button class="copy-btn fade-in" style="animation-delay: 0.3s" id="copyBtn">
-        <span>📋</span>
-        Copy Message
-    </button>
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="action-btn copy-btn" id="copyBtn">
+            <span>📋</span>
+            Copy
+        </button>
+        <button class="action-btn save-btn" id="saveBtn">
+            <span>⭐</span>
+            Save
+        </button>
+        <button class="action-btn favorites-btn" id="favoritesBtn">
+            <span>📁</span>
+            My Favorites
+        </button>
+    </div>
+</div>
+
+<!-- Favorites Modal -->
+<div class="modal-overlay" id="favoritesModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">⭐ My Favorite Messages</h2>
+            <button class="close-modal" id="closeModal">✕</button>
+        </div>
+        <div class="favorites-list" id="favoritesList">
+            <!-- Favorites will be loaded here -->
+        </div>
+    </div>
 </div>
 
 <!-- Toast -->
@@ -345,6 +498,7 @@
 const selectedRating = "r";
 let currentQuestion = "";
 let currentType = "";
+let favorites = JSON.parse(localStorage.getItem('hottyMomFavorites')) || [];
 
 // Spicy fallback questions
 const spicyQuestions = {
@@ -373,9 +527,7 @@ const spicyQuestions = {
 // Show toast
 function showToast(message) {
     const toast = document.getElementById('toast');
-    if (message) {
-        toast.innerHTML = `<span>✅</span><span>${message}</span>`;
-    }
+    toast.innerHTML = `<span>✅</span><span>${message}</span>`;
     toast.classList.add('show');
     setTimeout(() => {
         toast.classList.remove('show');
@@ -400,7 +552,6 @@ function showLoading(show) {
 async function getTruth() {
     const messageElement = document.getElementById('message');
     
-    // Show loading
     showLoading(true);
     messageElement.textContent = "Getting spicy truth... 💭";
     
@@ -410,28 +561,19 @@ async function getTruth() {
         currentQuestion = data.question;
         currentType = "TRUTH";
     } catch (error) {
-        // Use fallback
         const randomIndex = Math.floor(Math.random() * spicyQuestions.truth.length);
         currentQuestion = spicyQuestions.truth[randomIndex];
         currentType = "TRUTH";
     }
     
-    // Show message
     showLoading(false);
-    messageElement.textContent = `${currentQuestion}`;
-    messageElement.classList.add('pulse');
-    
-    // Remove pulse animation
-    setTimeout(() => {
-        messageElement.classList.remove('pulse');
-    }, 300);
+    messageElement.textContent = currentQuestion;
 }
 
 // Get dare
 async function getDare() {
     const messageElement = document.getElementById('message');
     
-    // Show loading
     showLoading(true);
     messageElement.textContent = "Cooking up hot dare... 🔥";
     
@@ -441,21 +583,13 @@ async function getDare() {
         currentQuestion = data.question;
         currentType = "DARE";
     } catch (error) {
-        // Use fallback
         const randomIndex = Math.floor(Math.random() * spicyQuestions.dare.length);
         currentQuestion = spicyQuestions.dare[randomIndex];
         currentType = "DARE";
     }
     
-    // Show message
     showLoading(false);
-    messageElement.textContent = `${currentQuestion}`;
-    messageElement.classList.add('pulse');
-    
-    // Remove pulse animation
-    setTimeout(() => {
-        messageElement.classList.remove('pulse');
-    }, 300);
+    messageElement.textContent = currentQuestion;
 }
 
 // Copy to clipboard
@@ -465,24 +599,17 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
         return;
     }
     
-    const textToCopy = `🔥 HOTTY MOM TRUTH OR DARE 🔥\n\n${currentType}:\n${currentQuestion}\n\n— Share with friends! —`;
-    
     try {
-        await navigator.clipboard.writeText(textToCopy);
+        await navigator.clipboard.writeText(currentQuestion);
         
-        // Button animation
         const copyBtn = document.getElementById('copyBtn');
         const originalHTML = copyBtn.innerHTML;
         copyBtn.innerHTML = `<span>✅</span> Copied!`;
-        copyBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)';
         
-        // Show toast
         showToast("Message copied! 💋");
         
-        // Reset button
         setTimeout(() => {
             copyBtn.innerHTML = originalHTML;
-            copyBtn.style.background = 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)';
         }, 2000);
         
     } catch (err) {
@@ -490,22 +617,134 @@ document.getElementById('copyBtn').addEventListener('click', async () => {
     }
 });
 
-// Add some decorative hearts
+// Save to favorites
+document.getElementById('saveBtn').addEventListener('click', () => {
+    if (!currentQuestion) {
+        showToast("No message to save! Get one first 😉");
+        return;
+    }
+    
+    // Check if already saved
+    const isAlreadySaved = favorites.some(fav => fav.text === currentQuestion);
+    
+    if (isAlreadySaved) {
+        showToast("This message is already in your favorites! ⭐");
+        return;
+    }
+    
+    // Add to favorites
+    favorites.push({
+        text: currentQuestion,
+        type: currentType,
+        date: new Date().toLocaleDateString()
+    });
+    
+    // Save to localStorage
+    localStorage.setItem('hottyMomFavorites', JSON.stringify(favorites));
+    
+    // Button feedback
+    const saveBtn = document.getElementById('saveBtn');
+    const originalHTML = saveBtn.innerHTML;
+    saveBtn.innerHTML = `<span>✅</span> Saved!`;
+    
+    showToast("Message saved to favorites! ⭐");
+    
+    setTimeout(() => {
+        saveBtn.innerHTML = originalHTML;
+    }, 2000);
+});
+
+// Show favorites modal
+document.getElementById('favoritesBtn').addEventListener('click', () => {
+    loadFavorites();
+    document.getElementById('favoritesModal').classList.add('show');
+});
+
+// Close modal
+document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('favoritesModal').classList.remove('show');
+});
+
+// Close modal when clicking outside
+document.getElementById('favoritesModal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('favoritesModal')) {
+        document.getElementById('favoritesModal').classList.remove('show');
+    }
+});
+
+// Load favorites into modal
+function loadFavorites() {
+    const favoritesList = document.getElementById('favoritesList');
+    
+    if (favorites.length === 0) {
+        favoritesList.innerHTML = `
+            <div class="empty-favorites">
+                <div style="font-size: 3rem; margin-bottom: 15px;">⭐</div>
+                <p>No favorites yet!</p>
+                <p>Save some spicy messages first 😉</p>
+            </div>
+        `;
+        return;
+    }
+    
+    favoritesList.innerHTML = favorites.map((fav, index) => `
+        <div class="favorite-item">
+            <div class="favorite-text">
+                <strong>${fav.type}:</strong><br>
+                ${fav.text}
+                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">
+                    Saved on ${fav.date}
+                </div>
+            </div>
+            <div class="favorite-actions">
+                <button class="favorite-btn" onclick="copyFavorite(${index})" title="Copy">
+                    📋
+                </button>
+                <button class="favorite-btn" onclick="removeFavorite(${index})" title="Remove">
+                    🗑️
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Copy favorite
+async function copyFavorite(index) {
+    if (index >= 0 && index < favorites.length) {
+        try {
+            await navigator.clipboard.writeText(favorites[index].text);
+            showToast("Favorite copied! 📋");
+        } catch (err) {
+            showToast("Failed to copy favorite 😅");
+        }
+    }
+}
+
+// Remove favorite
+function removeFavorite(index) {
+    if (index >= 0 && index < favorites.length) {
+        favorites.splice(index, 1);
+        localStorage.setItem('hottyMomFavorites', JSON.stringify(favorites));
+        loadFavorites();
+        showToast("Removed from favorites 🗑️");
+    }
+}
+
+// Add decorative emojis
 document.addEventListener('DOMContentLoaded', () => {
-    // Add floating emojis as decoration
     const emojis = ['💋', '🔥', '💖', '😈', '🎭', '💃', '📱', '🤫'];
     
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 8; i++) {
         const emoji = document.createElement('div');
         emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         emoji.style.position = 'fixed';
-        emoji.style.fontSize = Math.random() * 24 + 16 + 'px';
+        emoji.style.fontSize = Math.random() * 20 + 14 + 'px';
         emoji.style.left = Math.random() * 100 + 'vw';
         emoji.style.top = Math.random() * 100 + 'vh';
-        emoji.style.opacity = Math.random() * 0.3 + 0.1;
+        emoji.style.opacity = Math.random() * 0.2 + 0.1;
         emoji.style.pointerEvents = 'none';
         emoji.style.zIndex = '-1';
-        emoji.style.animation = `float ${Math.random() * 10 + 20}s infinite linear`;
+        emoji.style.animation = `float ${Math.random() * 15 + 15}s infinite linear`;
         document.body.appendChild(emoji);
     }
     
@@ -513,10 +752,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(90deg); }
-            50% { transform: translateY(0) rotate(180deg); }
-            75% { transform: translateY(20px) rotate(270deg); }
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-40px) rotate(90deg); opacity: 0.2; }
+            50% { transform: translateY(0) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(40px) rotate(270deg); opacity: 0.2; }
         }
     `;
     document.head.appendChild(style);
